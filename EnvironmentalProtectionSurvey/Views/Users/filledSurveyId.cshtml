@@ -1,0 +1,37 @@
+﻿@model EnvironmentalProtectionSurvey.Models.FilledSurvey
+
+@{
+    ViewData["Title"] = "Survey Details";
+}
+
+<h1>Survey Details</h1>
+
+<p>
+    <strong>Survey Title:</strong> @Model.Survey.Title
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Selected Answer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var question in Model.Survey.Questions)
+        {
+            <tr>
+                <td>@question.Title</td>
+                <td>
+                    @foreach (var filledSurveyOption in Model.Survey.FilledSurveys
+                   .Where(fs => fs.UserId == Model.UserId && fs.SurveyId == Model.SurveyId && fs.Option.QuestionId == question.Id)
+                   .Select(fs => fs.Option))
+                    {
+                        @* @filledSurveyOption.Answer *@
+                        <br />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

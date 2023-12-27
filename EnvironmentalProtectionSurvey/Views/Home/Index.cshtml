@@ -1,0 +1,274 @@
+﻿@*@model IEnumerable<EnvironmentalProtectionSurvey.Models.User>*@
+@model EnvironmentalProtectionSurvey.Models.NewsSurveyViewModel
+@using EnvironmentalProtectionSurvey.Models
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Enviromental Protection";
+}
+
+<!DOCTYPE html>
+
+<html lang="">
+<head>
+    <title>Nekmit</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+    <link href="~/css/styles/layout.css" rel="stylesheet" />
+</head>
+<body id="top">
+    <!-- Top Background Image Wrapper -->
+    <div class="bgded overlay padtop" style="background-image:url('images/demo/backgrounds/01.png');">
+        <!-- ################################################################################################ -->
+        <header id="header" class="hoc clear">
+            <div id="logo" class="fl_left">
+                <!-- ################################################################################################ -->
+                <a asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.png" style="width: 50px;margin-bottom: 20px;" />
+
+                </a>
+                
+                <!-- ################################################################################################ -->
+            </div>
+            <nav id="mainav" class="fl_right">
+                <!-- ################################################################################################ -->
+                <ul class="clear">
+                    <li class="active"><a asp-action="" asp-controller="Home">Home</a></li>
+                    <li class="active"><a asp-action="SurveyBoard" asp-controller="Home">Survey Board</a></li>
+                    <li class="active"><a asp-action="" asp-controller="Home">Support</a></li>
+                    <li class="active"><a asp-action="Faqs" asp-controller="Home">FAQs</a></li>
+                   
+
+                    @if (Context.Session.GetString("username") == null)
+                    {
+                        @*chi hien thi khi nguoi dung chua dang nhap*@
+                        <li>
+                            @Html.ActionLink("Login/Register","Login","Users")
+                        </li>
+                    }
+
+                    @if (Context.Session.GetString("username") != null)
+                    {
+
+                        <!-- Chỉ hiển thị khi người dùng đã đăng nhập -->
+                        <li><a href="pages/sidebar-right.html"></a></li>
+                        <li>@Html.ActionLink("Hello " + @Context.Session.GetString("username"), "Details", "Users")</li>
+                        
+                        
+                        @Html.ActionLink("Logout","Logout","Users")
+
+                    }
+                 
+                </ul>
+                <!-- ################################################################################################ -->
+            </nav>
+        </header>
+        <!-- ################################################################################################ -->
+        <div id="pageintro" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <article>
+                <h3 class="heading">Environmental protection survey</h3>
+                <p>Mother Nature is always speaking. She speaks in a language understood within the peaceful mind of the sincere observer.</p>
+                
+            </article>
+            <!-- ################################################################################################ -->
+        </div>
+        <!-- ################################################################################################ -->
+    </div>
+    <!-- End Top Background Image Wrapper -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper row1">
+        <section id="ctdetails" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <ul class="nospace clear">
+                <li class="one_quarter first">
+                    <div class="block clear"><a href="#"><i class="fas fa-phone"></i></a> <span><strong>Give us a call:</strong> +00 (123) 456 7890</span></div>
+                </li>
+                <li class="one_quarter">
+                    <div class="block clear"><a href="#"><i class="fas fa-envelope"></i></a> <span><strong>Send us a mail:</strong> support@domain.com</span></div>
+                </li>
+                <li class="one_quarter">
+                    <div class="block clear"><a href="#"><i class="fas fa-clock"></i></a> <span><strong> Mon. - Sat.:</strong> 08.00am - 18.00pm</span></div>
+                </li>
+                <li class="one_quarter">
+                    <div class="block clear"><a href="#"><i class="fas fa-map-marker-alt"></i></a> <span><strong>Come visit us:</strong> Directions to <a href="https://maps.app.goo.gl/Wqb5nxR6eYMtH97k6">our location</a></span></div>
+                </li>
+            </ul>
+            <!-- ################################################################################################ -->
+        </section>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper row3">
+        <main class="hoc container clear">
+            <!-- main body -->
+            <!-- ################################################################################################ -->
+            <section id="services">
+                <div class="sectiontitle">
+                    @*<p class="nospace font-xs">Mauris tempor aliquam venenatis</p>*@
+                    <h6 class="heading">List of current surveys and contests</h6>
+                </div>
+                <ul class="nospace group grid-3">
+                   
+                    @{
+                        var index = 0;
+                    }
+                    @foreach (var survey in Model.SurveyList)
+                    {
+
+                        <li class="one_third">
+                            <article>
+                                <a href="#"><i class="fas fa-spray-can"></i></a>
+                                <h6 class="heading">@survey.Title</h6>
+                                <footer>
+                                    <p>Students: @ViewBag.StudentParticipantCounts[index]</p>
+                                    <p>Teachers: @ViewBag.TeacherParticipantCounts[index]</p>
+                                    
+                                    @if(Context.Session.GetString("username") == null)
+                                    {
+                                        <p>Please <a href="@Url.Action("Login", "Users")">login</a> to participate in this survey.</p>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("TakeSurvey", "Home", new { id = survey.Id })">More Details &raquo;</a>
+                                    }
+                                    <div>
+                                        <small>Start: @survey.CreatedAt</small>
+                                        <br>
+                                        <small>End: @survey.EndAt</small>
+                                    </div>
+                                    
+                                </footer>
+                            </article>
+                        </li>
+                        index++;
+                    }
+                </ul>
+            </section>
+            <!-- ################################################################################################ -->
+            <!-- / main body -->
+            <div class="clear"></div>
+        </main>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
+        <section class="hoc container clear">
+            <!-- ################################################################################################ -->
+           
+            <article id="points" class="group">
+                <div class="two_third first">
+                    <h6 class="heading">Environmental protection</h6>
+                    <p>Environmental protection is activities that keep the environment fresh and clean. Improve the environment, ensure ecological balance. Prevent and overcome negative consequences caused by humans and nature to the environment. Exploit, use rationally and save natural resources.</p>
+                    <ul class="nospace group">
+                        <li><span>1</span> Reduce emissions from cars by walking or cycling.</li>
+                        <li><span>2</span> Use rainwater for many different purposes.</li>
+                        <li><span>3</span> Use recycled paper to save trees.</li>
+                        <li><span>4</span> Do not wasting water.</li>
+                        <li><span>5</span> Use green or environmentally friendly products.</li>
+                        <li><span>6</span> Conserver wild life. </li>
+                        <li><span>7</span> Prohibit hunters who hunt animals too many out of the law allowance.</li>
+                        <li><span>8</span> Use wind farm.</li>
+                    </ul>
+                </div>
+                <div class="one_third last"><a class="imgover" href="#"><img src="images/demo/348x394.png" alt=""></a></div>
+            </article>
+            <!-- ################################################################################################ -->
+        </section>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper row3">
+       
+        <section id="services">
+            <div class="sectiontitle">
+                @*<p class="nospace font-xs">Mauris tempor aliquam venenatis</p>*@
+            </div>
+            <ul class="nospace group grid-3">
+
+                @foreach (var news in Model.NewsList)
+                {
+
+                    <li class="one_third">
+                        <article style="border: none">
+                            <a class="imgover" href="#">
+                                <img src="@news.Image" alt="" style="width:300px; height:200px">
+                            </a>
+                            <footer>
+                                <ul class="nospace meta clear">
+                                    <li><i class="fas fa-user"></i> <a href="#">Admin</a></li>
+                                </ul>
+                                <h6 class="heading"><a href="#">@news.Title</a></h6>
+                            </footer>
+                        </article>
+                    </li>
+                    index++;
+                }
+            </ul>
+        </section>
+    </div>
+    <!-- ################################################################################################ -->
+    <div class="wrapper row4">
+        <footer id="footer" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <div class="one_quarter first">
+                <p>If you have any questions, please contact us</p>
+                <ul class="faico clear">
+                    <li><a class="faicon-facebook" href="https://www.facebook.com/aptech.fpt"><i class="fab fa-facebook"></i></a></li>
+                    <li><a class="faicon-google-plus" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                    <li><a class="faicon-linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
+                    <li><a class="faicon-twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a class="faicon-vk" href="#"><i class="fab fa-vk"></i></a></li>
+                </ul>
+            </div>
+            <div class="one_quarter">
+                <h6 class="heading">Overview</h6>
+                <ul class="nospace linklist">
+                    <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                    <li><a href="#">Survey Board</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a asp-action="Faqs" asp-controller="Home">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="one_quarter">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1732.8036964616429!2d106.66530364320104!3d10.785782975436444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ed2392c44df%3A0xc50651be73746c64!2zNTkwIMSQLiBDw6FjaCBN4bqhbmcgVGjDoW5nIDgsIFBoxrDhu51uZyAxMSwgUXXhuq1uIDMsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCA3MjM1NjQsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1703057197430!5m2!1svi!2s" width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+         @*   <div class="one_quarter last">
+                <ul class="nospace linklist">
+                    <li>
+                        <article>
+                            
+                            <p class="nospace">Wasting time is useless, cleaning the environment is the best</p>
+                        </article>
+                    </li>
+                    <li>
+                        <article>
+                            <p class="nospace">Save the Environment and you will Save the Life and Future.</p>
+                        </article>
+                    </li>
+                </ul>
+            </div>*@
+            <!-- ################################################################################################ -->
+        </footer>
+    </div>
+    <!-- ################################################################################################ -->
+    <div class="wrapper row5">
+        <!-- ################################################################################################ -->
+        <p class="fl_left">Copyright &copy; @DateTime.Now.Year - All Rights Reserved - <a href="#">Domain Name</a></p>
+        <p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+        <!-- ################################################################################################ -->
+    </div>
+    <!-- ################################################################################################ -->
+    <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+    <!-- JAVASCRIPTS -->
+    <script src="~/js/scripts/jquery.backtotop.js"></script>
+    <script src="~/js/scripts/jquery.min.js"></script>
+    <script src="~/js/scripts/jquery.mobilemenu.js"></script>
+</body>
+
+</html>

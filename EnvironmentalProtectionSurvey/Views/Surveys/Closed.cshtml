@@ -1,0 +1,12 @@
+﻿@model EnvironmentalProtectionSurvey.Models.Survey
+
+@{
+    ViewData["Title"] = "Survey closed";
+}
+<h1>@Model.Title</h1>
+
+<p style="color:red">We're sorry, the form <b>@Model.Title</b> is no longer accepting respones.</p>
+<p style="color:gray">Try contacting the owner of the form if you think is a mistake.</p>
+<div>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Back to homepage</a>
+</div>

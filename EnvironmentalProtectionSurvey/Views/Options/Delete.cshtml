@@ -1,0 +1,21 @@
+﻿@model EnvironmentalProtectionSurvey.Models.Option
+
+@{
+    ViewData["Title"] = "Delete Option";
+    Layout = "~/Views/Shared/_LayoutBE.cshtml";
+}
+
+<nav class="navbar default-layout">
+    <div class="navbar-menu-wrapper d-flex align-items-top">
+        <h1>Delete Option?</h1>
+    </div>
+    <h3>Are you sure you want to delete @Model.Title?</h3>
+</nav>
+
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<EnvironmentalProtectionSurvey.Models.FilledSurveyDetails>
+
+<h1>Survey Participation History</h1>
+
+<p><strong>Survey Title:</strong> @Model.FirstOrDefault()?.Survey.Title</p>
+<p><strong>Participant:</strong> @Model.FirstOrDefault()?.FilledSurvey.User.UserName</p>
+
+@foreach (var surveyDetail in Model)
+{
+    <div>
+        <h4>@surveyDetail.Question.Title</h4>
+        <p>
+            <strong>Selected Options:</strong>
+            @foreach (var selectedOption in surveyDetail.SelectedOptions)
+            {
+                @selectedOption.Title
+            }
+        </p>
+    </div>
+}
+
+<a asp-action="SurveyParticipationHistory">Back to Survey List</a>

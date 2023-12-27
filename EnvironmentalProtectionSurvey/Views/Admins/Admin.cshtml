@@ -1,0 +1,105 @@
+﻿@model IEnumerable<EnvironmentalProtectionSurvey.Models.User>
+
+@{
+    ViewData["Title"] = "Admins";
+    Layout = "~/Views/Shared/_LayoutBE.cshtml";
+}
+
+<nav class="navbar default-layout">
+    <div class="navbar-menu-wrapper d-flex align-items-top">
+        <h1>Admins</h1>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <form class="search-form">
+                    <i class="icon-search"></i>
+                    <input type="search" name="asearch" class="form-control" placeholder="Search Here" title="Search here">
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="table-responsive mt-1">
+    <table class="table select-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Class)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Specification)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Section)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JoinDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Role)
+                </th>
+                <th>
+                    Action
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" style="color:red">Not match found!</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Class)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Specification)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Section)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JoinDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            <ul class="navbar-nav flex-grow-1">
+                                <li>
+                                    <a asp-action="Details" asp-route-id="@item.Id" type="button" class="btn btn-outline-success"><span class="btn-label"><i class="fa fa-info"></i></span>Info</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-outline-warning"><span class="btn-label"><i class="fa fa-edit"></i></span>Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-outline-danger"><span class="btn-label"><i class="fa fa-trash"></i></span>Delete</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

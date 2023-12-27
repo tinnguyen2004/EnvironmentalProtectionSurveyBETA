@@ -1,0 +1,69 @@
+﻿@model EnvironmentalProtectionSurvey.Models.Faq
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutBE.cshtml";
+}
+<nav class="navbar default-layout">
+    <div class="navbar-menu-wrapper d-flex align-items-top">
+        <h1>New FAQs</h1>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" id="FaqsForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Answer" class="control-label"></label>
+                <input asp-for="Answer" class="form-control" />
+                <span asp-validation-for="Answer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-light">Back to List</a>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function () {
+            $('#FaqsForm').submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'FAQs Created!',
+                                text: 'The Faqs has been created successfully.',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '@Url.Action("Index")'; // Redirect to Index action
+                                }
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error here
+                        console.error(xhr, status, error);
+                        // Display an error message to the user
+                    }
+                });
+            });
+        });
+    </script>
+}

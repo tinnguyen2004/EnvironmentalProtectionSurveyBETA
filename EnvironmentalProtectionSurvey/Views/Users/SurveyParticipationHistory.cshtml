@@ -1,0 +1,36 @@
+﻿@model IEnumerable<EnvironmentalProtectionSurvey.Models.FilledSurvey>
+
+@{
+    ViewData["Title"] = "Survey Participation History";
+}
+
+<h1>Survey Participation History</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Join At</label>
+            </th>
+            <th>
+                <label>Survey</label>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Survey.Title)
+                </td>
+                <td>
+                    <a asp-action="DetailsSurveyParticipationHistory" asp-route-surveyId="@item.Survey.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

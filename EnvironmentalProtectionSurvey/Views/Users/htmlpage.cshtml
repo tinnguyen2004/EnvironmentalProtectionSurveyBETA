@@ -1,0 +1,98 @@
+﻿@model EnvironmentalProtectionSurvey.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>User</h4>
+<hr />
+
+<h3>@ViewBag.msg</h3>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SignUp">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName"  class="text-danger"></span>
+            </div>
+            <span style="color:red">@ViewBag.errUsername</span>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" placeholder="Enter your password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Confirm Password</label>
+                <input name="confirmPassword" type="password" placeholder="Enter cofirm password" class="form-control" />
+            </div>
+            <span style="color:red">@ViewBag.confirmPassword</span>
+
+            <div class="form-group">
+                <label asp-for="NumberCode" class="control-label"></label>
+                <input asp-for="NumberCode" placeholder="Enter your numbercode" class="form-control" />
+                <span asp-validation-for="NumberCode" class="text-danger"></span>
+            </div>
+            <span style="color:red">@ViewBag.errNumberCode</span>
+
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" placeholder="Enter your Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <span style="color:red">@ViewBag.errEmail</span>
+
+            <div class="form-group">
+                <label asp-for="Class" class="control-label"></label>
+                <input asp-for="Class" placeholder="Enter your class" class="form-control" />
+                <span asp-validation-for="Class" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Specification" class="control-label"></label>
+                <input asp-for="Specification" placeholder="Enter your specification" class="form-control" />
+                <span asp-validation-for="Specification" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Section" class="control-label"></label>
+                <input asp-for="Section" placeholder="Enter your section" class="form-control" />
+                <span asp-validation-for="Section" class="text-danger"></span>
+            </div>
+            @*  <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <select asp-for="Role" asp-items="@GetRoleOptions()" class="form-control">
+                    <option value="">-- Select Role --</option>
+                </select>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@functions {
+    private SelectList GetRoleOptions()
+    {
+        var Role = new List<SelectListItem>
+    {
+    new SelectListItem { Value = "Student", Text = "Student" },
+    new SelectListItem { Value = "Teacher", Text = "Teacher" }
+    };
+
+    return new SelectList(Role, "Value", "Text");
+    }
+    }

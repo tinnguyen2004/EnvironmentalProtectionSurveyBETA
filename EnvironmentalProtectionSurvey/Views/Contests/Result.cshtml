@@ -1,0 +1,32 @@
+﻿@model List<EnvironmentalProtectionSurvey.Models.ResultViewModel>
+@{
+    ViewData["Title"] = "Contest Results";
+    Layout = "~/Views/Shared/_LayoutBE.cshtml";
+}
+<h2>Contest Results</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct</th>
+        </tr>
+
+        @foreach (var result in Model)
+        {
+            <tr>
+                <td>@result.QuestionText</td>
+                <td>@result.UserAnswer</td>
+                <td>@(result.IsCorrect ? "Yes" : "No")</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No results available.</p>
+}
+
+<a href="@Url.Action("Index", "Home")">Back to Home</a>

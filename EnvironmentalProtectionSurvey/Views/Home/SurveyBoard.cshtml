@@ -1,0 +1,157 @@
+﻿@model EnvironmentalProtectionSurvey.Models.NewsSurveyViewModel
+@using EnvironmentalProtectionSurvey.Models
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Enviromental Protection";
+}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://fuvavi.com/wp-content/themes/fuvavi-v2/favicon.png">
+    <link rel="stylesheet" type="text/css" href="https://fuvavi.com/wp-content/themes/fuvavi-v2/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://fuvavi.com/wp-content/themes/fuvavi-v2/style.css">
+    <!-- / Yoast SEO plugin. -->
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- HEADER -->
+        <header id="header" class="f-header">
+            <nav class="navbar navbar-expand-md fixed-top">
+                <div class="container">
+                    <div class="f-logo">hello world</div>
+                </div>
+            </nav>
+        </header>
+        <!-- !HEADER -->
+        <div class="f-content">
+            <div class="container">
+                <div class="flex-xl-nowrap">
+                    <div class="fvv-content single-content">
+                        <div class="f-post-content-box">
+                            <p id="breadcrumbs" class="f-breadcrumbs text-left"><span><span><a>Trang chủ</a></span> » <span class="breadcrumb_last" aria-current="page">BEM: phương pháp tổ chức CSS hiệu quả và linh hoạt nhất</span></span></p>                		<div class="f-post-img">
+                                <img src="https://fuvavi.com/wp-content/uploads/2023/06/fuvavi-bem.jpg" class="attachment-full size-full wp-post-image" alt="BEM: phương pháp tổ chức CSS hiệu quả và linh hoạt nhất" decoding="async" loading="lazy" />                            <a href="#" class="f_zoom_avatar f_zoom_avatar_btn">
+                                    <i class="fa fa-play" aria-hidden="true"></i>
+                                    <div class="f-post-category">
+                                        <div class="f-post-category-link">
+                                            <ul class="post-categories">
+                                                <li><a href="https://fuvavi.com/category/thiet-ke-web" rel="category tag">Thiết kế web</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="f-post-zoom-avatar f_zoom_avatar_btn">
+                                            <img src="https://fuvavi.com/wp-content/themes/fuvavi-v2/images/icon/ic_expand.png" alt="Phóng to" title="Phóng to">
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="f-post-content-left">
+                                <div class="f-post-title">
+                                    <h1>BEM: phương pháp tổ chức CSS hiệu quả và linh hoạt nhất</h1>
+                                </div>
+                            </div>
+                            @{
+                                var index = 0;
+                            }
+
+                            <div class="f-post-content-right">
+                                <div class="fvv-content-box">
+                                    <h3 class="fcb-title">Tiếp theo</h3>
+                                    @foreach (var survey in Model.SurveyList)
+                                    {
+                                        <div class="post_box post_box_related">
+                                            <div class="post_box_item">
+                                                <div class="post_box_content">
+                                                    <h3 class="post_box_title">
+                                                        @survey.Title
+                                                    </h3>
+                                                </div>
+                                                @if (Context.Session.GetString("username") == null)
+                                                {
+                                                    <p>Please <a href="@Url.Action("Login", "Users")">login</a> to participate in this survey.</p>
+                                                }
+                                                else
+                                                {
+                                                    <h3>
+                                                        <a href="@Url.Action("TakeSurvey", "Home", new { id = survey.Id })">More Details &raquo;</a>
+                                                    </h3>
+                                                }
+                                                <div class="post_box_media">
+                                                    <div class="post_view">Start: @survey.CreatedAt</div>
+                                                    <span class="post_dot">•</span>
+                                                    <div class="post_time">End: @survey.EndAt</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        index++;
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/themes/fuvavi-v2/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/themes/fuvavi-v2/libs/popper/umd/popper.js"></script>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/themes/fuvavi-v2/libs/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/themes/fuvavi-v2/libs/owlcarousel/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/themes/fuvavi-v2/js/main.js"></script>
+        
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/plugins/wpdiscuz/assets/js/wpdiscuz-combo.min.js?ver=7.6.13" id="wpdiscuz-combo-js-js"></script>
+        <script type="text/javascript" id="ez-toc-scroll-scriptjs-js-extra">
+            /* <![CDATA[ */
+            var eztoc_smooth_local = { "scroll_offset": "30" };
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/plugins/easy-table-of-contents/assets/js/smooth_scroll.min.js?ver=2.0.61" id="ez-toc-scroll-scriptjs-js"></script>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/plugins/easy-table-of-contents/vendor/js-cookie/js.cookie.min.js?ver=2.2.1" id="ez-toc-js-cookie-js"></script>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/plugins/easy-table-of-contents/vendor/sticky-kit/jquery.sticky-kit.min.js?ver=1.9.2" id="ez-toc-jquery-sticky-kit-js"></script>
+        <script type="text/javascript" id="ez-toc-js-js-extra">
+            /* <![CDATA[ */
+            var ezTOC = { "smooth_scroll": "1", "visibility_hide_by_default": "", "scroll_offset": "30", "fallbackIcon": "<span class=\"\"><span class=\"eztoc-hide\" style=\"display:none;\">Toggle<\/span><span class=\"ez-toc-icon-toggle-span\"><svg style=\"fill: #333333;color:#333333\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" class=\"list-377408\" width=\"20px\" height=\"20px\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M6 6H4v2h2V6zm14 0H8v2h12V6zM4 11h2v2H4v-2zm16 0H8v2h12v-2zM4 16h2v2H4v-2zm16 0H8v2h12v-2z\" fill=\"currentColor\"><\/path><\/svg><svg style=\"fill: #333333;color:#333333\" class=\"arrow-unsorted-368013\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"10px\" height=\"10px\" viewBox=\"0 0 24 24\" version=\"1.2\" baseProfile=\"tiny\"><path d=\"M18.2 9.3l-6.2-6.3-6.2 6.3c-.2.2-.3.4-.3.7s.1.5.3.7c.2.2.4.3.7.3h11c.3 0 .5-.1.7-.3.2-.2.3-.5.3-.7s-.1-.5-.3-.7zM5.8 14.7l6.2 6.3 6.2-6.3c.2-.2.3-.5.3-.7s-.1-.5-.3-.7c-.2-.2-.4-.3-.7-.3h-11c-.3 0-.5.1-.7.3-.2.2-.3.5-.3.7s.1.5.3.7z\"\/><\/svg><\/span><\/span>" };
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/plugins/easy-table-of-contents/assets/js/front.min.js?ver=2.0.61-1702475783" id="ez-toc-js-js"></script>
+        <script type="text/javascript" src="https://fuvavi.com/wp-content/plugins/enlighter/cache/enlighterjs.min.js?ver=0A0B0C" id="enlighterjs-js"></script>
+        <script type="text/javascript" id="enlighterjs-js-after">
+            /* <![CDATA[ */
+            !function (e, n) { if ("undefined" != typeof EnlighterJS) { var o = { "selectors": { "block": "pre.EnlighterJSRAW", "inline": "code.EnlighterJSRAW" }, "options": { "indent": 4, "ampersandCleanup": true, "linehover": true, "rawcodeDbclick": false, "textOverflow": "break", "linenumbers": true, "theme": "enlighter", "language": "generic", "retainCssClasses": false, "collapse": false, "toolbarOuter": "", "toolbarTop": "{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}", "toolbarBottom": "" } }; (e.EnlighterJSINIT = function () { EnlighterJS.init(o.selectors.block, o.selectors.inline, o.options) })() } else { (n && (n.error || n.log) || function () { })("Error: EnlighterJS resources not loaded yet!") } }(window, console);
+            /* ]]> */
+        </script>
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                $('.channel-menu-inner ul li').last().click(function () {
+                    $('.f-navbar-search-mb').slideDown();
+                    $('#nav-input-search').focus();
+                });
+            });
+        </script>
+</body>
+</html>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $('.f-post-content img').attr('data-action', 'zoom');
+    });
+</script>
+<link rel="stylesheet" type="text/css" href="https://fuvavi.com/wp-content/themes/fuvavi-v2/libs/zoomimgpost/css/zoom.css">
+<script type="text/javascript" src="https://fuvavi.com/wp-content/themes/fuvavi-v2/libs/zoomimgpost/js/velocity.min.js"></script>
+<script type="text/javascript" src="https://fuvavi.com/wp-content/themes/fuvavi-v2/libs/zoomimgpost/js/enhance.js"></script>
+<script type="text/javascript">
+    $('.fvv-sidebar').toggleClass('hidden-menu');
+    $('.f-content .fvv-content').toggleClass('hidden-menu');
+    $('#btn-menu-pc').click(function () {
+        $('.fvv-sidebar').toggleClass('hidden-menu');
+        if ($('.fvv-sidebar').hasClass('hidden-menu')) {
+            $('.backdrop-menu').removeClass('active');
+        }
+        else {
+            $('.backdrop-menu').addClass('active');
+            $('.backdrop-menu').click(function () {
+                $('.backdrop-menu').removeClass('active');
+                $('.fvv-sidebar').addClass('hidden-menu');
+            });
+        }
+    });
+</script>

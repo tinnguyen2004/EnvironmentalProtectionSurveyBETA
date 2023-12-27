@@ -1,0 +1,80 @@
+﻿@model EnvironmentalProtectionSurvey.Models.Contest
+@{
+    ViewData["Title"] = "Take Contest";
+    Layout = "~/Views/Shared/_LayoutBE.cshtml";
+}
+<h2>Take Contest</h2>
+
+@if (Model == null)
+{
+    <p>Contest not found</p>
+}
+else
+{
+    <p>Contest Title: @Model.Title</p>
+@*     <p>Contest Description: @Model.Description</p> *@
+
+    @if (Model.QuestionContests != null)
+    {
+        using (Html.BeginForm("TakeContest", "Contests", FormMethod.Post))
+        {
+            <p>@ViewBag.Count</p>
+            <form asp-action="TakeContest" method="post">
+                @Html.HiddenFor(model => model.Id) <!-- Hidden field to pass the contest ID -->
+                @foreach (var question in Model.QuestionContests)
+                {
+                <h4>@question.QuestionText</h4>
+
+                if (question.AnswerOptions != null)
+                {
+                foreach (var option in question.AnswerOptions)
+                {
+                <div class="col-sm-5">
+                    <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="radio" name="selectedOptions[@question.Id]" value="@option" />
+                        @option
+                    </label>
+                    </div>
+                </div>
+                }
+                }
+                else
+                {
+                <p>No answer options available for this question.</p>
+                }
+                }
+                <button type="submit" class="btn btn-primary me-2 submit-contest">Submit</button>
+            </form>
+        }
+    }
+    else
+    {
+        <p>No questions available for this contest.</p>
+    }
+}
+@section Scripts {
+    <script>
+        $(function () {
+            $('.submit-contest').click(function (event) {
+                // Prevent the default form submission behavior
+                event.preventDefault();
+                // Use SweetAlert2 for confirmation
+                Swal.fire({
+                    title: 'Are you sure want to submit?',
+                    text: 'You won\'t be able to revert this!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, submit it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user clicks 'Yes', submit the form programmatically
+                        $(this).closest('form').submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

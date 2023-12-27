@@ -1,0 +1,17 @@
+﻿@model IEnumerable<EnvironmentalProtectionSurvey.Models.Faq>
+
+@{
+    ViewData["Title"] = "FAQs";
+    Layout = "~/Views/Shared/_Layout_FAQS.cshtml";
+}
+@foreach (var item in Model)
+{
+    <div class="faq-content">
+        <div class="faq-question">
+            <input id="@("q" + item.Id)" type="checkbox" class="panel">
+            <div class="plus">+</div>
+            <label for="@("q" + item.Id)" class="panel-title">@Html.DisplayFor(modelItem => item.Title)</label>
+            <div class="panel-content">@Html.DisplayFor(modelItem => item.Answer)</div>
+        </div>
+    </div>
+}

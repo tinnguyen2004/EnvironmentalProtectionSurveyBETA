@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Charts";
+    Layout = "~/Views/Shared/_LayoutBE.cshtml";
+}
+<div class="row">
+    <div class="col-6">
+        <h3>Doughnut Chart</h3>
+        <canvas id="customdoughnutchart" class="my-auto" height="200"></canvas>
+    </div>
+    <div class="col-6">
+        <h3>Bar Chart</h3>
+        <canvas id="custombarchart" class="my-auto" height="200"></canvas>
+    </div>
+</div>
+<!-- custom js -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script> <!-- quan trọng -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Chart/GetList",
+            data: "",
+            contextType: "application/json; charset=utf8",
+            dataType: "json",
+            success: OnSuccess,
+        });
+
+        function OnSuccess(data) {
+            const customdoughnutchart = document.getElementById('customdoughnutchart');
+            const custombarchart = document.getElementById('custombarchart');
+            var _data = data;
+            var _labels = _data[0];
+            var _ChartData = _data[1];
+            // var colors = ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Orange', 'Pink', 'Turquoise', 'Lime Green', 'Indigo'];
+
+            new Chart(customdoughnutchart,
+                {
+                    type: 'doughnut',
+                    data: {
+                        labels: _labels,
+                        datasets: [{
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            data: _ChartData,
+                            borderWidth: 1,
+                        }]
+                    }
+                });
+
+            //Chart Bar
+            new Chart(custombarchart,
+                {
+                    type: 'bar',
+                    data: {
+                        labels: _labels,
+                        datasets: [{
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            data: _ChartData,
+                            borderWidth: 1,
+                        }]
+                    }
+                });
+        }
+    });
+</script>
