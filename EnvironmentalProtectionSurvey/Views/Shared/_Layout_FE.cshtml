@@ -27,7 +27,7 @@
                     <img src="~/images/logo.png" style="width: 50px;margin-bottom: 20px;" />
 
                 </a>
-                
+
                 <!-- ################################################################################################ -->
             </div>
             <nav id="mainav" class="fl_right">
@@ -37,7 +37,7 @@
                     <li class="active"><a asp-action="SurveyBoard" asp-controller="Home">Survey Board</a></li>
                     <li class="active"><a asp-action="" asp-controller="Home">Support</a></li>
                     <li class="active"><a asp-action="Faqs" asp-controller="Home">FAQs</a></li>
-                   
+
 
                     @if (Context.Session.GetString("username") == null)
                     {
@@ -53,12 +53,12 @@
                         <!-- Chỉ hiển thị khi người dùng đã đăng nhập -->
                         <li><a href="pages/sidebar-right.html"></a></li>
                         <li>@Html.ActionLink("Hello " + @Context.Session.GetString("username"), "Details", "Users")</li>
-                        
-                        
+
+
                         @Html.ActionLink("Logout","Logout","Users")
 
                     }
-                 
+
                 </ul>
                 <!-- ################################################################################################ -->
             </nav>
@@ -69,7 +69,7 @@
             <article>
                 <h3 class="heading">Environmental protection survey</h3>
                 <p>Mother Nature is always speaking. She speaks in a language understood within the peaceful mind of the sincere observer.</p>
-                
+
             </article>
             <!-- ################################################################################################ -->
         </div>
@@ -112,7 +112,7 @@
                     <h6 class="heading">List of current surveys and contests</h6>
                 </div>
                 <ul class="nospace group grid-3">
-                   
+
                     @{
                         var index = 0;
                     }
@@ -126,8 +126,8 @@
                                 <footer>
                                     <p>Students: @ViewBag.StudentParticipantCounts[index]</p>
                                     <p>Teachers: @ViewBag.TeacherParticipantCounts[index]</p>
-                                    
-                                    @if(Context.Session.GetString("username") == null)
+
+                                    @if (Context.Session.GetString("username") == null)
                                     {
                                         <p>Please <a href="@Url.Action("Login", "Users")">login</a> to participate in this survey.</p>
                                     }
@@ -140,7 +140,7 @@
                                         <br>
                                         <small>End: @survey.EndAt</small>
                                     </div>
-                                    
+
                                 </footer>
                             </article>
                         </li>
@@ -159,7 +159,7 @@
     <div class="bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
         <section class="hoc container clear">
             <!-- ################################################################################################ -->
-           
+
             <article id="points" class="group">
                 <div class="two_third first">
                     <h6 class="heading">Environmental protection</h6>
@@ -184,7 +184,7 @@
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
     <div class="wrapper row3">
-       
+
         <section id="services">
             <div class="sectiontitle">
                 @*<p class="nospace font-xs">Mauris tempor aliquam venenatis</p>*@
@@ -203,7 +203,7 @@
                                 <ul class="nospace meta clear">
                                     <li><i class="fas fa-user"></i> <a href="#">Admin</a></li>
                                 </ul>
-                                <h6 class="heading"><a href="@Url.Action("Details","NewsFE", new { id = news.Id })">@news.Title</a></h6>
+                                <h6 class="heading"><a href="#">@news.Title</a></h6>
                             </footer>
                         </article>
                     </li>
@@ -238,20 +238,20 @@
             <div class="one_quarter">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1732.8036964616429!2d106.66530364320104!3d10.785782975436444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ed2392c44df%3A0xc50651be73746c64!2zNTkwIMSQLiBDw6FjaCBN4bqhbmcgVGjDoW5nIDgsIFBoxrDhu51uZyAxMSwgUXXhuq1uIDMsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCA3MjM1NjQsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1703057197430!5m2!1svi!2s" width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-         @*   <div class="one_quarter last">
-                <ul class="nospace linklist">
-                    <li>
-                        <article>
-                            
-                            <p class="nospace">Wasting time is useless, cleaning the environment is the best</p>
-                        </article>
-                    </li>
-                    <li>
-                        <article>
-                            <p class="nospace">Save the Environment and you will Save the Life and Future.</p>
-                        </article>
-                    </li>
-                </ul>
+            @*   <div class="one_quarter last">
+            <ul class="nospace linklist">
+            <li>
+            <article>
+
+            <p class="nospace">Wasting time is useless, cleaning the environment is the best</p>
+            </article>
+            </li>
+            <li>
+            <article>
+            <p class="nospace">Save the Environment and you will Save the Life and Future.</p>
+            </article>
+            </li>
+            </ul>
             </div>*@
             <!-- ################################################################################################ -->
         </footer>

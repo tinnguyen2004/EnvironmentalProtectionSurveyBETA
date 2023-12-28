@@ -1,0 +1,35 @@
+﻿@model EnvironmentalProtectionSurvey.Models.News
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_news.cshtml";
+}
+<!-- ##### Blog Area Start ##### -->
+<div class="blog-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="blog-posts-area">
+                    <!-- Single Featured Post -->
+                    <div class="single-blog-post featured-post single-post">
+                        <div class="post-thumb">
+                            <a href="#"><img src="@Model.Image" /></a>
+                        </div>
+                        <div class="post-data">
+                            <a href="#" class="post-title">
+                                <h6>@Html.DisplayFor(model => model.Title)</h6>
+                            </a>
+                            <div class="post-meta">
+                                <p class="post-author">By <a href="#">Christinne Williams</a></p>
+                                <p>
+                                    @Html.Raw(Model.Content)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Blog Area End ##### -->

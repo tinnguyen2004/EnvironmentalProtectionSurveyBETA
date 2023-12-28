@@ -19,7 +19,7 @@
     </div>
 </nav>
 <div class="table-responsive mt-1">
-    <table class="table select-table">
+    <table class="table select-table" id="Exampledatatable">
         <thead>
             <tr>
                 <th>
@@ -49,7 +49,6 @@
                 <th>
                     Action
                 </th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -103,3 +102,13 @@
         </tbody>
     </table>
 </div>
+@section scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.8/af-2.6.0/datatables.min.css">
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.8/af-2.6.0/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Exampledatatable").DataTable();
+        })
+    </script>
+}

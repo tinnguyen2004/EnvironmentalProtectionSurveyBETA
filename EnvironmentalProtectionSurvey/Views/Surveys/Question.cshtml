@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutBE.cshtml";
 }
 <nav class="navbar default-layout">
-    <div class="navbar-menu-wrapper d-flex align-items-top">
+    <div class="navbar-menu-wrapper d-flex align-items-top" >
         <h1>Info Question</h1>
     </div>
 </nav>
@@ -29,8 +29,8 @@
         </dl>
     </div>
 }
-
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Questions?.FirstOrDefault()?.Id" class="btn btn-primary me-2">Edit</a>
     <a asp-action="Index" class="btn btn-light">Back to List</a>
 </div>
+

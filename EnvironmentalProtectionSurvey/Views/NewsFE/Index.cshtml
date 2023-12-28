@@ -1,0 +1,110 @@
+﻿@model IEnumerable<EnvironmentalProtectionSurvey.Models.News>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_news.cshtml";
+}
+<nav id="mainav" class="fl_right">
+    <!-- ################################################################################################ -->
+    <ul class="clear">
+        <li class="active"><a asp-action="" asp-controller="Home">Home</a></li>
+        <li class="active"><a asp-action="SurveyBoard" asp-controller="Home">Survey Board</a></li>
+        <li class="active"><a asp-action="" asp-controller="Home">Support</a></li>
+        <li class="active"><a asp-action="Faqs" asp-controller="Home">FAQs</a></li>
+
+
+        @if (Context.Session.GetString("username") == null)
+        {
+            @*chi hien thi khi nguoi dung chua dang nhap*@
+            <li>
+                @Html.ActionLink("Login/Register","Login","Users")
+            </li>
+        }
+
+        @if (Context.Session.GetString("username") != null)
+        {
+
+            <!-- Chỉ hiển thị khi người dùng đã đăng nhập -->
+            <li><a href="pages/sidebar-right.html"></a></li>
+            <li>@Html.ActionLink("Hello " + @Context.Session.GetString("username"), "Details", "Users")</li>
+
+
+            @Html.ActionLink("Logout","Logout","Users")
+
+        }
+
+    </ul>
+    <!-- ################################################################################################ -->
+</nav>
+@foreach (var item in Model) {
+<!-- ##### Featured Post Area Start ##### -->
+<div class="featured-post-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-8">
+                <div class="row">
+
+                    <!-- Single Featured Post -->
+                    <div class="col-12 lg-9">
+                        <div class="single-blog-post featured-post">
+                            <div class="post-thumb">
+                                    <a asp-action="Details" asp-route-id="@item.Id"><h2>@Html.DisplayFor(modelItem => item.Title)</h2></a>
+                            </div>
+                            <div class="post-data">
+                                <a href="#" class="post-title image">
+                                        <img src="@item.Image" width="410" height="410" class="img-fluid" />
+                                        <div>@Html.Raw(item.Content!.Substring(0, 200) + "...")</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* <div class="col-12 col-lg-5">
+                        <!-- Single Featured Post -->
+                        <div class="single-blog-post featured-post-2">
+                            <div class="post-thumb">
+                                <a href="#"><img src="~/newspaper/img/bg-img/17.jpg" alt=""></a>
+                            </div>
+                            <div class="post-data">
+                                <a href="#" class="post-catagory">Finance</a>
+                                <div class="post-meta">
+                                    <a href="#" class="post-title">
+                                        <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac...</h6>
+                                    </a>
+                                    <!-- Post Like & Post Comment -->
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="post-like"><img src="~/newspaper/img/core-img/like.png" alt=""> <span>392</span></a>
+                                        <a href="#" class="post-comment"><img src="~/newspaper/img/core-img/chat.png" alt=""> <span>10</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Featured Post -->
+                        <div class="single-blog-post featured-post-2">
+                            <div class="post-thumb">
+                                <a href="#"><img src="~/newspaper/img/bg-img/18.jpg" alt=""></a>
+                            </div>
+                            <div class="post-data">
+                                <a href="#" class="post-catagory">Finance</a>
+                                <div class="post-meta">
+                                    <a href="#" class="post-title">
+                                        <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac...</h6>
+                                    </a>
+                                    <!-- Post Like & Post Comment -->
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="post-like"><img src="~/newspaper/img/core-img/like.png" alt=""> <span>392</span></a>
+                                        <a href="#" class="post-comment"><img src="~/newspaper/img/core-img/chat.png" alt=""> <span>10</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> *@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+}
+<!-- ##### Featured Post Area End ##### -->

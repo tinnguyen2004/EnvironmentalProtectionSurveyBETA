@@ -1,0 +1,125 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>The News Paper - News &amp; Lifestyle Magazine Template</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/newspaper/img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="~/newspaper/style.css">
+    <link href="~/css/styles/layout.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- ##### Header Area Start ##### -->
+        <header id="header" class="hoc clear">
+            <div id="logo" class="fl_left">
+                <!-- ################################################################################################ -->
+                <a asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.png" style="width: 50px;margin-bottom: 20px;" />
+                </a>
+                <!-- ################################################################################################ -->
+            </div>
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li class="active"><a asp-action="" asp-controller="Home">Home</a></li>
+                    <li class="active"><a asp-action="SurveyBoard" asp-controller="Home">Survey Board</a></li>
+                    <li class="active"><a asp-action="" asp-controller="Home">Support</a></li>
+                    <li class="active"><a asp-action="Faqs" asp-controller="Home">FAQs</a></li>
+
+
+                    @if (Context.Session.GetString("username") == null)
+                    {
+                        @*chi hien thi khi nguoi dung chua dang nhap*@
+                        <li>
+                            @Html.ActionLink("Login/Register","Login","Users")
+                        </li>
+                    }
+
+                    @if (Context.Session.GetString("username") != null)
+                    {
+
+                        <!-- Chỉ hiển thị khi người dùng đã đăng nhập -->
+                        <li><a href="pages/sidebar-right.html"></a></li>
+                        <li>@Html.ActionLink("Hello " + @Context.Session.GetString("username"), "Details", "Users")</li>
+
+
+                        @Html.ActionLink("Logout","Logout","Users")
+
+                    }
+
+                </ul>
+                <!-- ################################################################################################ -->
+            
+    <!-- ##### Header Area End ##### -->
+    <div class="bgded overlay padtop" style="background-image:url('images/demo/backgrounds/01.png');">
+    @RenderBody()
+    </div>
+        </nav>
+    </header>
+    <!-- ##### Hero Area Start ##### -->
+    <div class="hero-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-8">
+                    <!-- Breaking News Widget -->
+                    @* <div class="breaking-news-area d-flex align-items-center">
+                    <div class="news-title">
+                    <p>Breaking News</p>
+                    </div>
+                    <div id="breakingNewsTicker" class="ticker">
+                    <ul>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                    <li><a href="#">Welcome to Colorlib Family.</a></li>
+                    <li><a href="#">Nam eu metus sitsit amet, consec!</a></li>
+                    </ul>
+                    </div>
+                    </div>
+
+                    <!-- Breaking News Widget -->
+                    <div class="breaking-news-area d-flex align-items-center mt-15">
+                    <div class="news-title title2">
+                    <p>International</p>
+                    </div>
+                    <div id="internationalTicker" class="ticker">
+                    <ul>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                    <li><a href="#">Welcome to Colorlib Family.</a></li>
+                    <li><a href="#">Nam eu metus sitsit amet, consec!</a></li>
+                    </ul>
+                    </div>
+                    </div>
+                    </div> *@
+
+                    <!-- Hero Add -->
+                    @* <div class="col-12 col-lg-4">
+                    <div class="hero-add">
+                    <a href="#"><img src="~/newspaper/img/bg-img/hero-add.gif" alt=""></a>
+                    </div>
+                    </div> *@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Hero Area End ##### -->
+    <!-- ##### All Javascript Files ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="~/newspaper/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="~/newspaper/js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="~/newspaper/js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="~/newspaper/js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="~/newspaper/js/active.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
